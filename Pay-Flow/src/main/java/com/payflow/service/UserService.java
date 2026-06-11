@@ -10,5 +10,6 @@ public interface UserService {
     List<User> getAllUsers();
     Optional<User> getUserById(Long id);
     Optional<User> findByUpiId(String upiId);
+    boolean upiIdExists(String upiId);
     List<User> getHighBalanceUsers(Double minBalance);
 }

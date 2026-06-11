@@ -20,6 +20,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(User user) {
+        if (userRepository.existsByUpiId(user.getUpiId())) {
+            throw new IllegalArgumentException("UPI ID already exists");
+        }
         return userRepository.save(user);
     }
 
@@ -35,7 +38,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findByUpiId(String upiId) {
-        return userRepository.findByUpiId(upiId);
+        return userRepository.findFirstByUpiIdOrderByUserIdAsc(upiId);
+    }
+
+    @Override
+    public boolean upiIdExists(String upiId) {
+        return userRepository.existsByUpiId(upiId);
     }
 
     @Override

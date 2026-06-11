@@ -11,8 +11,11 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-   Optional<User> findByUpiId(String upiId);
-   // for minimum user
+    Optional<User> findFirstByUpiIdOrderByUserIdAsc(String upiId);
+
+    boolean existsByUpiId(String upiId);
+
+    // for minimum user
     @Query("SELECT u FROM User u WHERE u.balance > :minBalance")
     List<User> findUsersWithBalanceGreaterThan(@Param("minBalance") Double minBalance);
 }

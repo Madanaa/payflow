@@ -27,6 +27,10 @@ public class UserController {
             log.info("User's upiId is empty");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+        if (userService.upiIdExists(user.getUpiId())) {
+            log.info("User's upiId already exists: {}", user.getUpiId());
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.registerUser(user));
     }
 

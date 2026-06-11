@@ -11,7 +11,7 @@ public class User {
     private Long userId;
     @Column(name = "name")
     private String name;
-    @Column(name = "upi_id")
+    @Column(name = "upi_id", unique = true)
     private String upiId;
     @Column(name = "balance")
     private Double balance;
